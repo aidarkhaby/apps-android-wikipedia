@@ -13,7 +13,7 @@ val skipButton = listOf(
 )
 val continueButton = listOf(
     MaterialButton::class.java,
-    R.id.fragment_onboarding_done_button,
+    R.id.fragment_onboarding_forward_button,
     R.string.onboarding_continue
 )
 val imageOnboardingPage = listOf(
@@ -23,11 +23,13 @@ val imageOnboardingPage = listOf(
 )
 val primaryText = listOf(
     AppTextView::class.java,
-    R.id.primaryTextView
+    R.id.primaryTextView,
+    R.string.onboarding_welcome_title_v2
 )
 val secondaryText = listOf(
     AppTextView::class.java,
-    R.id.secondaryTextView
+    R.id.secondaryTextView,
+    R.string.onboarding_multilingual_secondary_text
 )
 val labelText = listOf(
     AppTextView::class.java,
