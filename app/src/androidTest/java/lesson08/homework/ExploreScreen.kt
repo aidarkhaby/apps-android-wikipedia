@@ -26,6 +26,8 @@ object ExploreScreen : KScreen<ExploreScreen>() {
             itemType(::SearchItem)
             itemType(::CustomizeItem)
             itemType(::DayItem)
+            itemType(::TopReadItem)
+            itemType(::NewsItem)
         }
     )
 }
