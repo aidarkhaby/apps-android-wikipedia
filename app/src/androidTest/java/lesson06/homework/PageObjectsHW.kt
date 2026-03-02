@@ -57,7 +57,7 @@ object PageObjectsHW : KScreen<PageObjectsHW>() {
     }
 
     val themeTitle = KTextView {
-        containsText("Theme")
+        withText(R.string.color_theme_select)
     }
 
     val lightThemeButton = KTextView {
