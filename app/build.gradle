@@ -174,6 +174,8 @@ dependencies {
     // use http://gradleplease.appspot.com/ or http://search.maven.org/.
     // Debug with ./gradlew -q app:dependencies --configuration compile
 
+    androidTestImplementation("com.kaspersky.android-components:kaspresso-allure-support:1.6.0")
+
     androidTestImplementation "com.kaspersky.android-components:kaspresso:1.6.0"
     coreLibraryDesugaring libs.desugar.jdk.libs
 
@@ -310,4 +312,50 @@ private static Properties loadProperties(File file) {
         System.err.println "\"${file}\" not found"
     }
     return props
+}
+
+// Удаление локальных отчётов
+tasks.register("deleteLocalAllureResults", Delete) {
+    group = "verification"
+    description = "Deletes local allure-results directory"
+
+    def targetDir = file("build/allure-results")
+    delete targetDir
+}
+
+
+// Загрузка отчётов с девайса в сборочную директорию
+tasks.register("pullAllureResults", Exec) {
+    group = "verification"
+    description = "Pulls allure-results from device to app/build"
+
+
+    // добавление зависимости от задачи deleteLocalAllureResults
+    dependsOn tasks.named("deleteLocalAllureResults")
+
+    def adbCommand = ["adb", "pull", "/sdcard/Documents/allure-results", "build"]
+    commandLine adbCommand
+
+    ignoreExitValue true
+}
+
+
+// Очистка отчётов на девайсе
+tasks.register("clearDeviceAllureResults", Exec) {
+    group = "verification"
+    description = "Clears allure-results directory on Android device"
+
+    def adbCommand = ["adb", "shell", "rm", "-rf", "/sdcard/Documents/allure-results"]
+    commandLine adbCommand
+
+    ignoreExitValue true
+}
+
+
+// Настройка зависимостей - для всех заданий с названием connected и androidtest выполнять clearDeviceAllureResults перед заданием и pullAllureResults после задания
+tasks.withType(com.android.build.gradle.internal.tasks.AndroidTestTask).configureEach { Task task ->
+    if (task.name.toLowerCase().startsWith("connected") && task.name.toLowerCase().endsWith("androidtest")) {
+        task.dependsOn tasks.named("clearDeviceAllureResults")
+        task.finalizedBy tasks.named("pullAllureResults")
+    }
 }
