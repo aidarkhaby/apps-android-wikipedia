@@ -4,12 +4,10 @@ import com.kaspersky.kaspresso.screens.KScreen
 import io.github.kakaocup.kakao.image.KImageView
 import io.github.kakaocup.kakao.recycler.KRecyclerView
 import io.github.kakaocup.kakao.text.KButton
-import lesson08.homework.CustomizeItem
 import lesson08.homework.DayItem
 import lesson08.homework.FeaturedArticleItem
 import lesson08.homework.NewsItem
 import lesson08.homework.SearchItem
-import lesson08.homework.TopReadItem
 import lesson18.extensions.invokeWithText
 import lesson18.extensions.name
 import lesson18.utils.NamedScreen
@@ -56,5 +54,9 @@ object ExploreScreen : NamedScreen<ExploreScreen>() {
 
     fun customizeBlock(fnc: CustomizeItem.() -> Unit) {
         items.invokeWithText("Customize", fnc)
+    }
+
+    fun topReadBlock( fnc: TopReadItem.() -> Unit) {
+        items.invokeWithText("Top read", fnc)
     }
 }
