@@ -1,9 +1,11 @@
 package lesson18.screens.explore
 
+import com.google.android.material.textview.MaterialTextView
 import com.kaspersky.kaspresso.screens.KScreen
 import io.github.kakaocup.kakao.image.KImageView
 import io.github.kakaocup.kakao.recycler.KRecyclerView
 import io.github.kakaocup.kakao.text.KButton
+import io.github.kakaocup.kakao.text.KTextView
 import lesson08.homework.DayItem
 import lesson08.homework.FeaturedArticleItem
 import lesson08.homework.NewsItem
@@ -11,7 +13,10 @@ import lesson08.homework.SearchItem
 import lesson18.extensions.invokeWithText
 import lesson18.extensions.name
 import lesson18.utils.NamedScreen
+import lesson21.invokeAtIndexAndClass
+import lesson21.invokeAtIndexAndId
 import org.wikipedia.R
+import org.wikipedia.feed.featured.FeaturedArticleCardView
 import org.wikipedia.feed.view.FeedView
 
 object ExploreScreen : NamedScreen<ExploreScreen>() {
@@ -56,7 +61,34 @@ object ExploreScreen : NamedScreen<ExploreScreen>() {
         items.invokeWithText("Customize", fnc)
     }
 
-    fun topReadBlock( fnc: TopReadItem.() -> Unit) {
+    fun topReadBlock(fnc: TopReadItem.() -> Unit) {
         items.invokeWithText("Top read", fnc)
+    }
+
+    fun featuredArticleWithClass(index: Int, fnc: FeaturedArticleItem.() -> Unit) {
+        items.invokeAtIndexAndClass(
+            index,
+            (index + 1) * 10,
+            1,
+            FeaturedArticleCardView::class.java,
+            "$index блок Featured Article",
+            fnc
+        )
+    }
+
+    fun featuredArticleWithId(index: Int, fnc: FeaturedArticleItem.() -> Unit) {
+        items.invokeAtIndexAndId(
+            index,
+            0,
+            (index + 1) * 10,
+            1,
+            "$index блок Featured Article",
+            fnc
+        )
+    }
+
+    val searchField = KButton(){
+        isInstanceOf(MaterialTextView::class.java)
+        withText("Search Wikipedia")
     }
 }
