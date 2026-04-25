@@ -2,8 +2,10 @@ package lesson19
 
 import io.github.kakaocup.kakao.common.actions.BaseActions
 import io.github.kakaocup.kakao.common.assertions.BaseAssertions
+import io.github.kakaocup.kakao.image.KImageView
 import io.github.kakaocup.kakao.text.TextViewAssertions
 import lesson18.extensions.getName
+import lesson23.KWebViewElement
 
 class Verify(private val steps: StepDefinitions) : StepsDsl<Verify>() {
 
@@ -40,4 +42,11 @@ class Verify(private val steps: StepDefinitions) : StepsDsl<Verify>() {
             element
         )
     }
+
+    fun isDisplayed(element: KWebViewElement){
+        steps.isDisplayed(
+            "Проверяет, что отображается '${(element as BaseActions).getName()}'",
+            element
+        )
+        }
 }

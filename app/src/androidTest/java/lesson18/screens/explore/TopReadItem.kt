@@ -48,6 +48,12 @@ class TopReadItem(matcher: Matcher<View>) : KRecyclerItem<TopReadItem>(matcher) 
         }.name(withParent("Кнопка more link"))
     }
 
+    val themeButton by lazy {
+        KTextView {
+            withId(R.id.page_theme)
+        }.name(withParent("Кнопка тема"))
+    }
+
     fun cardListItem(index: Int, fnc: TopReadRecycler.() -> Unit) {
         topReadItems.invokeAtIndex(index, fnc)
     }

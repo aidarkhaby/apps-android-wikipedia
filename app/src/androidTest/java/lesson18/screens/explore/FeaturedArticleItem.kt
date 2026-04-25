@@ -35,4 +35,10 @@ class FeaturedArticleItem(matcher: Matcher<View>) : KRecyclerItem<FeaturedArticl
             }
         ).name(withParent("Список статей"))
     }
+
+    val image by lazy {
+        KImageView(matcher) {
+            withId(R.id.articleImage)
+        }.name(withParent("Картинка"))
+    }
 }

@@ -4,6 +4,7 @@ import com.kaspersky.kaspresso.testcases.core.testcontext.TestContext
 import io.github.kakaocup.kakao.common.actions.BaseActions
 import io.github.kakaocup.kakao.common.assertions.BaseAssertions
 import io.github.kakaocup.kakao.text.TextViewAssertions
+import lesson23.KWebViewElement
 
 class StepDefinitions(private val testContext: TestContext<*>) {
 
@@ -40,4 +41,11 @@ class StepDefinitions(private val testContext: TestContext<*>) {
             fnc()
         }
     }
+
+    fun isDisplayed(step: String, element: KWebViewElement){
+        execute(step){
+            element.performWebViewAction { scroll() }
+        }
+    }
+
 }

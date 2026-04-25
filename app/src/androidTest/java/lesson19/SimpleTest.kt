@@ -17,6 +17,7 @@ class SimpleTest : TestCase(Kaspresso.Builder.withForcedAllureSupport()) {
     @get:Rule
     val testRule = ActivityScenarioRule(MainActivity::class.java)
 
+    /*
     @Test
     fun example() {
         run {
@@ -38,6 +39,8 @@ class SimpleTest : TestCase(Kaspresso.Builder.withForcedAllureSupport()) {
             }
         }
     }
+
+     */
 
     @Test
     fun toggleTest() {

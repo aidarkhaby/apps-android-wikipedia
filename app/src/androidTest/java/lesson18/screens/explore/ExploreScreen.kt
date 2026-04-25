@@ -15,6 +15,7 @@ import lesson18.extensions.name
 import lesson18.utils.NamedScreen
 import lesson21.invokeAtIndexAndClass
 import lesson21.invokeAtIndexAndId
+import lesson22.SearchWidget
 import org.wikipedia.R
 import org.wikipedia.feed.featured.FeaturedArticleCardView
 import org.wikipedia.feed.view.FeedView
@@ -87,8 +88,14 @@ object ExploreScreen : NamedScreen<ExploreScreen>() {
         )
     }
 
-    val searchField = KButton(){
+    val searchField = KTextView(){
         isInstanceOf(MaterialTextView::class.java)
         withText("Search Wikipedia")
+    }
+
+    val searchWidget by lazy{
+        SearchWidget {
+            withId(R.id.search_container)
+        }.name(withParent("Виджет поиска"))
     }
 }
