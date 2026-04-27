@@ -49,4 +49,13 @@ class Verify(private val steps: StepDefinitions) : StepsDsl<Verify>() {
             element
         )
         }
+
+    fun hasText(element: KWebViewElement, text: String) {
+        steps.hasTextWebView(
+            "Проверяет что текст в элементе '${(element).getName()}' эквивалентен '$text'",
+            element as KWebViewElement,
+            text,
+            false
+        )
+    }
 }

@@ -48,4 +48,19 @@ class StepDefinitions(private val testContext: TestContext<*>) {
         }
     }
 
+    fun clickOnWebView(step: String, element: KWebViewElement) {
+        execute(step) {
+            element.performWebViewAction {  click() }
+        }
+    }
+
+    fun hasTextWebView(step: String, element: KWebViewElement, text: String, isSubstring: Boolean) {
+        execute(step) {
+            if (isSubstring) {
+                element.performWebViewAction {  containsText(text) }
+            } else {
+                element.performWebViewAction {  hasText(text) }
+            }
+        }
+    }
 }

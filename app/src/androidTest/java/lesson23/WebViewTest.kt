@@ -12,7 +12,7 @@ import org.junit.Test
 class WebViewTest: BaseTest(){
 
     @Test
-    fun test(){
+    fun titleWebViewTest(){
         run {
             action.click(OnboardingScreen.skipButton)
             ExploreScreen.topReadBlock {
@@ -22,6 +22,31 @@ class WebViewTest: BaseTest(){
                 })
             }
             verify.isDisplayed(ArticleScreen.title)
+        }
+    }
+
+    @Test
+    fun indexReferenceWebViewTest(){
+        run {
+            action.click(OnboardingScreen.skipButton)
+            ExploreScreen.topReadBlock {
+                cardListItem(0) {
+                    action {
+                        click(image)
+                    }
+                }
+            }
+            ArticleScreen{
+                Thread.sleep(2000)
+                action.clickOnWebView(references)
+                Thread.sleep(2000)
+                referenceItem(2){
+                    verify.hasText(
+                        index,
+                        "[2]"
+                    )
+                }
+            }
         }
     }
 }

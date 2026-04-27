@@ -15,16 +15,6 @@ object ArticleScreen : NamedScreen<ArticleScreen>() {
         }
     }
 
-    /*
-    val title by lazy {
-        KWebViewElement (
-            webView,
-            "//h1"
-        ).name(withParent("Заголовок"))
-    }
-
-     */
-
     val title by lazy {
         webView.withXpath("//h1")
             .name(withParent("Заголовок"))
