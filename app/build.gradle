@@ -174,9 +174,11 @@ dependencies {
     // use http://gradleplease.appspot.com/ or http://search.maven.org/.
     // Debug with ./gradlew -q app:dependencies --configuration compile
 
-    androidTestImplementation("com.kaspersky.android-components:kaspresso-allure-support:1.6.0")
+    androidTestImplementation("com.kaspersky.android-components:kaspresso-allure-support:1.6.1")
+    androidTestImplementation "com.kaspersky.android-components:kaspresso-compose-support:1.6.1"
 
-    androidTestImplementation "com.kaspersky.android-components:kaspresso:1.6.0"
+
+    androidTestImplementation "com.kaspersky.android-components:kaspresso:1.6.1"
     coreLibraryDesugaring libs.desugar.jdk.libs
 
     implementation project(':analytics:testkitchen')

@@ -1,11 +1,15 @@
 package lesson19
 
+import io.github.kakaocup.compose.node.action.NodeActions
+import io.github.kakaocup.compose.node.assertion.NodeAssertions
 import io.github.kakaocup.kakao.common.actions.BaseActions
 import io.github.kakaocup.kakao.common.assertions.BaseAssertions
 import io.github.kakaocup.kakao.image.KImageView
 import io.github.kakaocup.kakao.text.TextViewAssertions
 import lesson18.extensions.getName
 import lesson23.KWebViewElement
+import lesson24.assertTrimmedTextIsEquals
+import lesson24.getName
 
 class Verify(private val steps: StepDefinitions) : StepsDsl<Verify>() {
 
@@ -43,12 +47,12 @@ class Verify(private val steps: StepDefinitions) : StepsDsl<Verify>() {
         )
     }
 
-    fun isDisplayed(element: KWebViewElement){
+    fun isDisplayed(element: KWebViewElement) {
         steps.isDisplayed(
             "Проверяет, что отображается '${(element as BaseActions).getName()}'",
             element
         )
-        }
+    }
 
     fun hasText(element: KWebViewElement, text: String) {
         steps.hasTextWebView(
@@ -56,6 +60,14 @@ class Verify(private val steps: StepDefinitions) : StepsDsl<Verify>() {
             element as KWebViewElement,
             text,
             false
+        )
+    }
+
+    fun assertTrimmedTextIsEquals(step: String, element: NodeAssertions, expected: String) {
+        steps.assertTrimmedTextIsEquals(
+            "verify trimmed text is equals${(element as NodeActions).getName()}'",
+            element,
+            expected
         )
     }
 }

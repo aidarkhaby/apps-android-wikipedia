@@ -4,7 +4,6 @@ import io.github.kakaocup.kakao.pager2.KViewPager2
 import io.github.kakaocup.kakao.text.KButton
 import lesson18.extensions.invokeByIndex
 import lesson18.extensions.name
-import lesson18.screens.onboarding.PagerItem
 import lesson18.utils.NamedScreen
 import org.wikipedia.R
 
@@ -39,5 +38,11 @@ object OnboardingScreen : NamedScreen<OnboardingScreen>() {
 
     fun page(index: Int, fnc: PagerItem.() -> Unit) {
         pager.invokeByIndex(index, fnc)
+    }
+
+    val addLanguageButton by lazy {
+        KButton {
+            withId(R.id.addLanguageButton)
+        }.name(withParent("Кнопка Add or edit languages"))
     }
 }

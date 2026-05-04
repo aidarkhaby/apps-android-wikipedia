@@ -38,6 +38,11 @@ import org.wikipedia.compose.components.error.WikiErrorClickEvents
 import org.wikipedia.compose.components.error.WikiErrorView
 import org.wikipedia.compose.theme.BaseTheme
 import org.wikipedia.compose.theme.WikipediaTheme
+import org.wikipedia.compose.uitest.Tags.CANONICAL_LANGUAGE_NAME
+import org.wikipedia.compose.uitest.Tags.LANGUAGE_LIST
+import org.wikipedia.compose.uitest.Tags.LOCALIZED_LANGUAGE_NAME
+import org.wikipedia.compose.uitest.lazyListItemPosition
+import org.wikipedia.compose.uitest.lazyListSize
 import org.wikipedia.theme.Theme
 import org.wikipedia.util.StringUtil
 import org.wikipedia.util.UiState
@@ -124,7 +129,8 @@ fun LanguagesListScreen(
                     modifier = modifier
                         .fillMaxSize()
                         .padding(paddingValues)
-                        .testTag("language_list"),
+                        .testTag(LANGUAGE_LIST)
+                    .lazyListSize(languagesItems.size),
                 ) {
                     itemsIndexed(languagesItems) { index, languageItem ->
                         if (languageItem.headerText.isNotEmpty()) {
@@ -133,7 +139,8 @@ fun LanguagesListScreen(
                                     .height(56.dp)
                                     .fillMaxWidth()
                                     .padding(horizontal = 16.dp)
-                                    .padding(bottom = 4.dp),
+                                    .padding(bottom = 4.dp)
+                                    .lazyListItemPosition(index),
                                 title = languageItem.headerText
                             )
                         } else {
@@ -146,7 +153,8 @@ fun LanguagesListScreen(
                                     })
                                     .fillMaxWidth()
                                     .padding(16.dp)
-                                    .testTag(languageItem.canonicalName),
+                                    .testTag(languageItem.canonicalName)
+                                    .lazyListItemPosition(index),
                                 localizedLanguageName = localizedLanguageName,
                                 subtitle = languageItem.canonicalName
                             )
@@ -196,7 +204,8 @@ fun LanguageListItemView(
             style = MaterialTheme.typography.titleMedium.copy(
                 color = WikipediaTheme.colors.primaryColor,
                 fontWeight = FontWeight.Bold,
-            )
+            ),
+            modifier = Modifier.testTag(LOCALIZED_LANGUAGE_NAME)
         )
         if (subtitle != null) {
             Text(
@@ -205,7 +214,8 @@ fun LanguageListItemView(
                     color = WikipediaTheme.colors.secondaryColor,
                     textAlign = TextAlign.Center,
                     lineHeight = 24.sp,
-                )
+                ),
+                modifier = Modifier.testTag(CANONICAL_LANGUAGE_NAME)
             )
         }
     }
