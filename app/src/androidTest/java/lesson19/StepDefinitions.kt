@@ -9,6 +9,9 @@ import io.github.kakaocup.kakao.text.TextViewAssertions
 import lesson23.KWebViewElement
 import lesson24.assertTrimmedTextIsEquals
 import lesson24.clickIfEnabled
+import lesson25.CloseGotIt
+import lesson25.ClosePlayTodayGame
+import lesson25.PassInterferingScreens
 
 class StepDefinitions(private val testContext: TestContext<*>) {
 
@@ -37,12 +40,6 @@ class StepDefinitions(private val testContext: TestContext<*>) {
     fun doesNotExist(step: String, element: BaseAssertions) {
         execute(step) {
             element.doesNotExist()
-        }
-    }
-
-    private fun execute(step: String, fnc: () -> Unit) {
-        testContext.step(step) {
-            fnc()
         }
     }
 
@@ -77,6 +74,24 @@ class StepDefinitions(private val testContext: TestContext<*>) {
     fun assertTrimmedTextIsEquals(step: String, element: NodeAssertions, expected: String) {
         execute(step) {
             element.assertTrimmedTextIsEquals(expected)
+        }
+    }
+
+    private val passInterferingScreens = PassInterferingScreens(
+        listOf(
+            ClosePlayTodayGame(testContext),
+            CloseGotIt(testContext)
+        )
+    )
+
+    private fun execute(step: String, fnc: () -> Unit) {
+        testContext.step(step) {
+            try {
+                fnc()
+            } catch (_: Throwable) {
+                passInterferingScreens.execute()
+                fnc()
+            }
         }
     }
 }
