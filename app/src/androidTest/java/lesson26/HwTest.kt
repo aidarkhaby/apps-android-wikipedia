@@ -24,9 +24,9 @@ class HwTest : TestCase(
             testLogger.i("Before block started")
             device.uiDevice.wakeUp()
             device.uiDevice.isNaturalOrientation
-        }
-
-        run {
+        }.after {
+            testLogger.i("After block started")
+        }.run {
             testLogger.i("Run block started")
             step("test interceptors") {
                 OnboardingScreen.continueButton {
