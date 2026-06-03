@@ -1,0 +1,42 @@
+name: "My Android Tests"
+outputDir: "build/reports/marathon"
+
+# Стратегия повторных запусков нестабильных тестов
+retryStrategy:
+  type: "fixed-quota"
+  totalAllowedRetryQuota: 3
+  retryPerTestQuota: 1
+
+vendorConfiguration:
+  type: "Android"
+
+  # Пути к APK (после компиляции Gradle)
+  applicationApk: "app/build/outputs/apk/debug/app-debug.apk"
+  testApplicationApk: "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk"
+
+  # Автоматическое разрешение пермишенов
+  autoGrantPermission: true
+
+  # Параллельный запуск на всех доступных устройствах
+  serialStrategy: "automatic"
+
+  # Настройка для параллельного запуска (используется pool из подключённых устройств)
+  pool:
+    type: "DevicePool"
+    devices:
+      - type: "AndroidDevice"
+
+  # Копирование отчётов с устройства (например, скриншотов, allure-results)
+  fileSyncConfiguration:
+    pull:
+      - relativePath: "screenshots"
+        aggregationMode: "TEST_RUN"
+        pathRoot: "EXTERNAL_STORAGE"
+      - relativePath: "allure-results"
+        aggregationMode: "DEVICE"
+        pathRoot: "EXTERNAL_STORAGE"
+
+  # Дополнительные аргументы для instrumentation
+  instrumentationArgs:
+    clearPackageData: "true"
+    debug: "false"

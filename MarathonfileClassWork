@@ -1,0 +1,19 @@
+name: "My awesome tests"
+outputDir: "marathon"
+debug: false
+vendorConfiguration:
+  adbInitTimeoutMillis: 60000
+  type: "Android"
+  applicationApk: "app/build/outputs/apk/alpha/debug/app-alpha-debug.apk"
+  testApplicationApk: "app/build/outputs/apk/androidTest/alpha/debug/app-alpha-debug-androidTest.apk"
+filteringConfiguration:
+  allowlist:
+  - type: "fully-qualified-test-name"
+    values:
+      - "org.wikipedia.lesson22.Tests.ThemeTest#themeWidgetChangeTextSizeTest"
+poolingStrategy:
+  type: "omni"
+batchingStrategy:
+  type: "isolate"
+shardingStrategy:
+  type: "parallel"
